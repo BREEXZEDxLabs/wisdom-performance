@@ -103,7 +103,7 @@ function GoldButton({ children, onClick, className = "", testId = "" }: { childr
     <button
       onClick={onClick}
       data-testid={testId}
-      className={`px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-wider transition-all duration-300 hover-glow ${className}`}
+      className={`px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-wider transition-all duration-300 ${className}`}
       style={{ background: "#D4AF37", color: "#0A0A14" }}
     >
       {children}
@@ -233,15 +233,11 @@ function HomeTab({ onTabChange }: { onTabChange: (tab: Tab) => void }) {
               </div>
               <div className="slide-up-fade delay-700">
                 <h1
-                  className="font-bold leading-tight mb-6 animate-gradient-shift"
+                  className="font-bold leading-tight mb-6"
                   style={{
                     fontFamily: "'Space Grotesk', sans-serif",
                     fontSize: "clamp(36px, 5vw, 60px)",
-                    background: "linear-gradient(90deg, #D4AF37, #00C9B1, #D4AF37)",
-                    backgroundSize: "200% 200%",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
+                    color: "#D4AF37",
                   }}
                 >
                   I Build Revenue Machines.
@@ -270,16 +266,12 @@ function HomeTab({ onTabChange }: { onTabChange: (tab: Tab) => void }) {
                 <div
                   className="w-full aspect-[3/4] rounded-2xl"
                   style={{
-                    background: "linear-gradient(135deg, #111122 0%, #1a1a3e 40%, #0d1a2e 100%)",
+                    background: "#111122",
                     border: "1px solid rgba(212,175,55,0.2)",
-                    boxShadow: "0 0 60px rgba(212,175,55,0.08)",
                     position: "relative",
                     overflow: "hidden",
                   }}
                 >
-                  {/* Decorative lines */}
-                  <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 30% 20%, rgba(212,175,55,0.07) 0%, transparent 60%)" }} />
-                  <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 70% 80%, rgba(0,201,177,0.05) 0%, transparent 60%)" }} />
                   <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
                     <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ background: "rgba(212,175,55,0.1)", border: "1px solid rgba(212,175,55,0.3)" }}>
                       <span className="text-3xl font-bold" style={{ color: "#D4AF37", fontFamily: "'Space Grotesk', sans-serif" }}>WO</span>
@@ -290,7 +282,7 @@ function HomeTab({ onTabChange }: { onTabChange: (tab: Tab) => void }) {
                 {/* Badge 1 */}
                 <div
                   className="absolute -top-4 -left-4 px-3 py-2 rounded-lg flex items-center gap-2"
-                  style={{ background: "#0A0A14", border: "1px solid #D4AF37", boxShadow: "0 4px 20px rgba(0,0,0,0.4)" }}
+                  style={{ background: "#0A0A14", border: "1px solid #D4AF37" }}
                   data-testid="badge-experience"
                 >
                   <Trophy size={14} style={{ color: "#D4AF37" }} />
@@ -299,7 +291,7 @@ function HomeTab({ onTabChange }: { onTabChange: (tab: Tab) => void }) {
                 {/* Badge 2 */}
                 <div
                   className="absolute -bottom-4 -right-4 px-3 py-2 rounded-lg flex items-center gap-2"
-                  style={{ background: "#0A0A14", border: "1px solid #D4AF37", boxShadow: "0 4px 20px rgba(0,0,0,0.4)" }}
+                  style={{ background: "#0A0A14", border: "1px solid #D4AF37" }}
                   data-testid="badge-roas"
                 >
                   <TrendingUp size={14} style={{ color: "#D4AF37" }} />
@@ -442,15 +434,8 @@ function ResultsTab() {
           <p className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: "#D4AF37", letterSpacing: "4px" }}>PROVEN OUTCOMES</p>
           <h1 className="text-5xl font-bold mb-3" style={{ fontFamily: "'Space Grotesk', sans-serif", color: "#FFFFFF" }}>Numbers Do Not Lie.</h1>
           <h2
-            className="text-4xl font-bold mb-8 animate-gradient-shift"
-            style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              background: "linear-gradient(90deg, #D4AF37, #00C9B1, #D4AF37)",
-              backgroundSize: "200% 200%",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
+            className="text-4xl font-bold mb-8"
+            style={{ fontFamily: "'Space Grotesk', sans-serif", color: "#D4AF37" }}
           >
             Neither Do My Clients.
           </h2>
@@ -734,14 +719,12 @@ function AboutTab() {
                 <div
                   className="w-full aspect-[3/4] rounded-2xl"
                   style={{
-                    background: "linear-gradient(135deg, #111122 0%, #1a1a3e 50%, #0d1a2e 100%)",
+                    background: "#111122",
                     border: "1px solid rgba(212,175,55,0.2)",
-                    boxShadow: "0 0 60px rgba(212,175,55,0.06)",
                     position: "relative",
                     overflow: "hidden",
                   }}
                 >
-                  <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 30% 20%, rgba(212,175,55,0.06) 0%, transparent 60%)" }} />
                   <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
                     <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ background: "rgba(212,175,55,0.1)", border: "1px solid rgba(212,175,55,0.3)" }}>
                       <span className="text-3xl font-bold" style={{ color: "#D4AF37", fontFamily: "'Space Grotesk', sans-serif" }}>WO</span>
@@ -944,7 +927,7 @@ function StickyButtons() {
         target="_blank"
         rel="noopener noreferrer"
         className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
-        style={{ background: "#25D366", boxShadow: "0 4px 20px rgba(37,211,102,0.3)" }}
+        style={{ background: "#25D366" }}
         data-testid="btn-whatsapp"
         title="Chat on WhatsApp"
       >
@@ -957,11 +940,10 @@ function StickyButtons() {
         onMouseEnter={() => setExpanded(true)}
         onMouseLeave={() => setExpanded(false)}
         data-testid="btn-sticky-booking"
-        className="flex items-center gap-2 rounded-full animate-pulse-gold transition-all duration-300"
+        className="flex items-center gap-2 rounded-full transition-all duration-300"
         style={{
           background: "#D4AF37",
           padding: expanded ? "12px 20px" : "12px",
-          boxShadow: "0 4px 20px rgba(212,175,55,0.3)",
           width: expanded ? "auto" : "48px",
           overflow: "hidden",
           whiteSpace: "nowrap",
