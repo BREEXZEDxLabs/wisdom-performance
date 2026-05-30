@@ -250,7 +250,7 @@ function HomeTab({ onTabChange }: { onTabChange: (tab: Tab) => void }) {
                 </p>
               </div>
               <div className="slide-up-fade delay-1100 flex flex-col sm:flex-row gap-4">
-                <GoldButton testId="btn-book-audit-hero" onClick={() => {}}>
+                <GoldButton testId="btn-book-audit-hero" onClick={() => window.open("https://calendly.com/olumoyewisdom01/30min", "_blank")}>
                   Book My Free Audit Call
                 </GoldButton>
                 <OutlineButton testId="btn-see-results-hero" onClick={() => onTabChange("results")}>
@@ -410,7 +410,7 @@ function HomeTab({ onTabChange }: { onTabChange: (tab: Tab) => void }) {
           <p className="text-base leading-relaxed mb-10" style={{ color: "#AAAACC" }}>
             Book a free 30-minute audit. I will review your current marketing, identify the 3 things costing you the most money, and show you exactly what I would build for your business. No pitch. No invoice.
           </p>
-          <GoldButton testId="btn-claim-audit" onClick={() => {}} className="text-base px-10 py-4">
+          <GoldButton testId="btn-claim-audit" onClick={() => window.open("https://calendly.com/olumoyewisdom01/30min", "_blank")} className="text-base px-10 py-4">
             Claim My Free Audit
           </GoldButton>
           <p className="mt-4 text-sm" style={{ color: "#AAAACC" }}>
@@ -685,7 +685,7 @@ function ServicesTab({ onTabChange }: { onTabChange: (tab: Tab) => void }) {
               All new clients begin with a free 30-minute strategy audit — no payment, no commitment required. If we are the right fit, I will give you a specific proposal with exact targets and deliverables.
             </p>
           </div>
-          <GoldButton testId="btn-start-audit-services" onClick={() => {}} className="mb-6 text-base px-10 py-4">
+          <GoldButton testId="btn-start-audit-services" onClick={() => window.open("https://calendly.com/olumoyewisdom01/30min", "_blank")} className="mb-6 text-base px-10 py-4">
             Start With a Free Audit
           </GoldButton>
           <p className="text-xs font-bold uppercase tracking-wider" style={{ color: "#D4AF37", letterSpacing: "2px" }}>
@@ -874,7 +874,7 @@ function Navbar({ activeTab, onTabChange }: { activeTab: Tab; onTabChange: (tab:
                 {t.label}
               </button>
             ))}
-            <GoldButton testId="btn-book-audit-nav" onClick={() => {}} className="text-xs py-2 px-4">
+            <GoldButton testId="btn-book-audit-nav" onClick={() => window.open("https://calendly.com/olumoyewisdom01/30min", "_blank")} className="text-xs py-2 px-4">
               Book Free Audit
             </GoldButton>
           </div>
@@ -909,7 +909,7 @@ function Navbar({ activeTab, onTabChange }: { activeTab: Tab; onTabChange: (tab:
               {t.label}
             </button>
           ))}
-          <GoldButton testId="btn-book-audit-mobile" onClick={() => setMenuOpen(false)} className="mt-4 text-base px-10 py-4">
+          <GoldButton testId="btn-book-audit-mobile" onClick={() => { setMenuOpen(false); window.open("https://calendly.com/olumoyewisdom01/30min", "_blank"); }} className="mt-4 text-base px-10 py-4">
             Book Free Audit
           </GoldButton>
         </div>
@@ -925,7 +925,7 @@ function StickyButtons() {
     <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-end">
       {/* WhatsApp */}
       <a
-        href="https://wa.me/1234567890?text=Hi%20Wisdom%2C%20I%20visited%20your%20portfolio%20and%20I'd%20like%20to%20discuss%20working%20together.%20Is%20a%2030-minute%20call%20available%20this%20week%3F"
+        href="https://wa.me/2348167795768?text=Hi%20Wisdom%2C%20I%20visited%20your%20portfolio%20and%20I'd%20like%20to%20discuss%20working%20together.%20Is%20a%2030-minute%20call%20available%20this%20week%3F"
         target="_blank"
         rel="noopener noreferrer"
         className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
@@ -938,7 +938,7 @@ function StickyButtons() {
 
       {/* Booking Button */}
       <button
-        onClick={() => {}}
+        onClick={() => window.open("https://calendly.com/olumoyewisdom01/30min", "_blank")}
         onMouseEnter={() => setExpanded(true)}
         onMouseLeave={() => setExpanded(false)}
         data-testid="btn-sticky-booking"
