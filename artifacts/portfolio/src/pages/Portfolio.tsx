@@ -5,6 +5,7 @@ import {
   Briefcase, ChevronRight, Star, Menu, X, Quote
 } from "lucide-react";
 import { SiWhatsapp } from "react-icons/si";
+import headshotPath from "@assets/headshot.jpg";
 
 type Tab = "home" | "results" | "services" | "about";
 
@@ -272,12 +273,13 @@ function HomeTab({ onTabChange }: { onTabChange: (tab: Tab) => void }) {
                     overflow: "hidden",
                   }}
                 >
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-                    <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ background: "rgba(212,175,55,0.1)", border: "1px solid rgba(212,175,55,0.3)" }}>
-                      <span className="text-3xl font-bold" style={{ color: "#D4AF37", fontFamily: "'Space Grotesk', sans-serif" }}>WO</span>
-                    </div>
-                    <p className="text-xs uppercase tracking-widest" style={{ color: "rgba(212,175,55,0.5)", letterSpacing: "3px" }}>Headshot</p>
-                  </div>
+                  <img
+                    src={headshotPath}
+                    alt="Wisdom O."
+                    fetchPriority="high"
+                    loading="eager"
+                    className="absolute inset-0 w-full h-full object-cover object-top"
+                  />
                 </div>
                 {/* Badge 1 */}
                 <div
@@ -725,12 +727,12 @@ function AboutTab() {
                     overflow: "hidden",
                   }}
                 >
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-                    <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ background: "rgba(212,175,55,0.1)", border: "1px solid rgba(212,175,55,0.3)" }}>
-                      <span className="text-3xl font-bold" style={{ color: "#D4AF37", fontFamily: "'Space Grotesk', sans-serif" }}>WO</span>
-                    </div>
-                    <p className="text-xs uppercase tracking-widest" style={{ color: "rgba(212,175,55,0.4)", letterSpacing: "3px" }}>Headshot</p>
-                  </div>
+                  <img
+                    src={headshotPath}
+                    alt="Wisdom O."
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover object-top"
+                  />
                 </div>
                 <div className="absolute -top-4 left-4 px-3 py-2 rounded-lg" style={{ background: "#0A0A14", border: "1px solid #D4AF37" }} data-testid="badge-remote">
                   <p className="text-xs font-bold" style={{ color: "#FFFFFF" }}>Remote-First | Available Worldwide</p>
