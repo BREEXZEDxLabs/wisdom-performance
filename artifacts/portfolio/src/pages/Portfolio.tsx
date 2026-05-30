@@ -6,8 +6,36 @@ import {
 } from "lucide-react";
 import { SiWhatsapp } from "react-icons/si";
 import headshotPath from "@assets/headshot.jpg";
+import proofPurchaseOverviewPath from "@assets/proof-backed case study 1/5825735289052270096.jpg";
+import proofRoasTablePath from "@assets/proof-backed case study 2/249cd548-f67f-414e-9bca-54c90e8e4335.webp";
+import proofLeadVolumePath from "@assets/proof-backed case study 3/665c739b-3b44-4ebd-a95b-8401cdd1b29b.webp";
+import proofGoogleAdsPath from "@assets/proof-backed case study 4/99eeab58-d01d-4b35-9e93-d68f465dfc2c.webp";
 
 type Tab = "home" | "results" | "services" | "about";
+
+type ProofRedaction = {
+  top?: string;
+  right?: string;
+  bottom?: string;
+  left?: string;
+  width: string;
+  height: string;
+};
+
+type CaseStudy = {
+  industry: string;
+  country: string;
+  headline: string;
+  challenge: string;
+  proofImage: string;
+  proofAlt: string;
+  proofCaption: string;
+  proofExplanation: string;
+  metrics: { label: string; value: string }[];
+  quote: string;
+  tags: string[];
+  redactions?: ProofRedaction[];
+};
 
 function useScrollReveal() {
   useEffect(() => {
@@ -163,45 +191,82 @@ function TestimonialCard({ quote, author, role, industry }: { quote: string; aut
   );
 }
 
+function ProofImage({ src, alt, caption, redactions = [] }: { src: string; alt: string; caption: string; redactions?: ProofRedaction[] }) {
+  return (
+    <figure className="rounded-xl overflow-hidden" style={{ background: "#0A0A14", border: "1px solid rgba(212,175,55,0.12)" }}>
+      <div className="relative">
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          className="w-full h-auto block"
+        />
+        {redactions.map((redaction, index) => (
+          <span
+            key={index}
+            aria-hidden="true"
+            className="absolute rounded-sm"
+            style={{
+              top: redaction.top,
+              right: redaction.right,
+              bottom: redaction.bottom,
+              left: redaction.left,
+              width: redaction.width,
+              height: redaction.height,
+              background: "rgba(10,10,20,0.96)",
+              border: "1px solid rgba(212,175,55,0.22)",
+            }}
+          />
+        ))}
+      </div>
+      <figcaption className="px-4 py-3 text-xs leading-relaxed" style={{ color: "#AAAACC" }}>
+        {caption}
+      </figcaption>
+    </figure>
+  );
+}
+
 function CaseStudyCard({
-  industry, country, headline, challenge, metrics, quote, tags
-}: {
-  industry: string; country: string; headline: string; challenge: string;
-  metrics: { label: string; value: string }[];
-  quote: string; tags: string[];
-}) {
+  industry, country, headline, challenge, proofImage, proofAlt, proofCaption, proofExplanation, metrics, quote, tags, redactions
+}: CaseStudy) {
   return (
     <div
       className="card-hover rounded-xl overflow-hidden"
       style={{ background: "#111122", border: "1px solid rgba(212,175,55,0.15)" }}
       data-testid={`case-study-${industry.toLowerCase().replace(/\s+/g, "-")}`}
     >
-      <div className="p-8 flex flex-col gap-5">
-        <div className="flex items-start justify-between gap-3">
-          <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest" style={{ background: "rgba(212,175,55,0.15)", color: "#D4AF37", letterSpacing: "2px" }}>
-            {industry}
-          </span>
-          <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest" style={{ background: "rgba(170,170,204,0.08)", color: "#AAAACC", letterSpacing: "2px" }}>
-            {country}
-          </span>
+      <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-0">
+        <div className="p-4 sm:p-6 lg:p-8">
+          <ProofImage src={proofImage} alt={proofAlt} caption={proofCaption} redactions={redactions} />
         </div>
-        <h3 className="text-xl font-bold leading-snug" style={{ color: "#FFFFFF" }}>{headline}</h3>
-        <p className="text-sm" style={{ color: "#AAAACC" }}><span style={{ color: "#D4AF37", fontWeight: 700 }}>Challenge:</span> {challenge}</p>
-        <div className="grid grid-cols-2 gap-3">
-          {metrics.map((m) => (
-            <div key={m.label} className="rounded-lg p-3" style={{ background: "rgba(212,175,55,0.05)", border: "1px solid rgba(212,175,55,0.1)" }}>
-              <p className="text-xs uppercase tracking-wider mb-1" style={{ color: "#AAAACC", letterSpacing: "1px" }}>{m.label}</p>
-              <p className="font-bold" style={{ color: "#D4AF37", fontFamily: "'JetBrains Mono', monospace" }}>{m.value}</p>
-            </div>
-          ))}
-        </div>
-        <blockquote className="italic text-sm border-l-2 pl-4" style={{ color: "#AAAACC", borderColor: "#D4AF37" }}>"{quote}"</blockquote>
-        <div className="flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <span key={tag} className="px-3 py-1 rounded-full text-xs" style={{ background: "rgba(0,201,177,0.08)", color: "#00C9B1", border: "1px solid rgba(0,201,177,0.2)" }}>
-              {tag}
+        <div className="p-8 flex flex-col gap-5 lg:border-l" style={{ borderColor: "rgba(212,175,55,0.1)" }}>
+          <div className="flex items-start justify-between gap-3">
+            <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest" style={{ background: "rgba(212,175,55,0.15)", color: "#D4AF37", letterSpacing: "2px" }}>
+              {industry}
             </span>
-          ))}
+            <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest" style={{ background: "rgba(170,170,204,0.08)", color: "#AAAACC", letterSpacing: "2px" }}>
+              {country}
+            </span>
+          </div>
+          <h3 className="text-xl font-bold leading-snug" style={{ color: "#FFFFFF" }}>{headline}</h3>
+          <p className="text-sm" style={{ color: "#AAAACC" }}><span style={{ color: "#D4AF37", fontWeight: 700 }}>Challenge:</span> {challenge}</p>
+          <p className="text-sm leading-relaxed" style={{ color: "#AAAACC" }}><span style={{ color: "#D4AF37", fontWeight: 700 }}>Proof shown:</span> {proofExplanation}</p>
+          <div className="grid grid-cols-2 gap-3">
+            {metrics.map((m) => (
+              <div key={m.label} className="rounded-lg p-3" style={{ background: "rgba(212,175,55,0.05)", border: "1px solid rgba(212,175,55,0.1)" }}>
+                <p className="text-xs uppercase tracking-wider mb-1" style={{ color: "#AAAACC", letterSpacing: "1px" }}>{m.label}</p>
+                <p className="font-bold" style={{ color: "#D4AF37", fontFamily: "'JetBrains Mono', monospace" }}>{m.value}</p>
+              </div>
+            ))}
+          </div>
+          <blockquote className="italic text-sm border-l-2 pl-4" style={{ color: "#AAAACC", borderColor: "#D4AF37" }}>"{quote}"</blockquote>
+          <div className="flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <span key={tag} className="px-3 py-1 rounded-full text-xs" style={{ background: "rgba(0,201,177,0.08)", color: "#00C9B1", border: "1px solid rgba(0,201,177,0.2)" }}>
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -428,6 +493,84 @@ function HomeTab({ onTabChange }: { onTabChange: (tab: Tab) => void }) {
 function ResultsTab() {
   useScrollReveal();
 
+  const caseStudies: CaseStudy[] = [
+    {
+      industry: "E-COMMERCE",
+      country: "US MARKET",
+      headline: "Purchase Campaign: 55 Website Purchases at $9.04 Each",
+      challenge: "The campaign needed measurable sales proof, not vanity metrics. The objective was to turn paid social traffic into tracked purchases at a controlled acquisition cost.",
+      proofImage: proofPurchaseOverviewPath,
+      proofAlt: "Meta Ads performance overview showing 55 website purchases, $9.04 per purchase, and $496.82 amount spent.",
+      proofCaption: "Meta Ads performance overview. Visible proof: 55 website purchases, $9.04 cost per purchase, and $496.82 spent.",
+      proofExplanation: "The dashboard shows purchase volume, cost per purchase, spend, and daily purchase movement across the campaign window. This supports the claim that the campaign generated tracked website purchases, not only clicks or leads.",
+      metrics: [
+        { label: "Purchases", value: "55" },
+        { label: "Cost/Purchase", value: "$9.04" },
+        { label: "Amount Spent", value: "$496.82" },
+        { label: "Tracked Event", value: "Website Purchase" },
+      ],
+      quote: "The important part was not traffic. It was whether the traffic converted into tracked purchases at a cost we could scale.",
+      tags: ["Meta Purchases", "Conversion Tracking", "E-Commerce"],
+    },
+    {
+      industry: "E-COMMERCE",
+      country: "INTERNATIONAL",
+      headline: "ROAS Rebuild: Purchase Ad Sets Producing 2.90x to 5.44x ROAS",
+      challenge: "The account needed clearer separation between winning and weak ad sets, with purchases and ROAS visible at the ad-set level.",
+      proofImage: proofRoasTablePath,
+      proofAlt: "Meta Ads Manager table showing purchase results, cost per result, amount spent, and purchase ROAS across multiple ad sets.",
+      proofCaption: "Meta Ads Manager ad-set table. Visible proof: purchase results, cost per purchase, spend, link clicks, and ROAS columns.",
+      proofExplanation: "The highlighted columns show purchase counts on the left and purchase ROAS on the right. Several ad sets are visibly producing profitable ROAS ranges, including 2.90x, 5.44x, 4.41x, and 3.64x.",
+      metrics: [
+        { label: "Total Spend", value: "$3,083.07" },
+        { label: "Link Clicks", value: "3,970" },
+        { label: "Top ROAS", value: "5.44x" },
+        { label: "Reach", value: "202,460" },
+      ],
+      quote: "Once the data was readable by ad set, we could stop guessing and move budget toward the campaigns proving purchase return.",
+      tags: ["ROAS Optimisation", "Ad Set Scaling", "Meta Ads"],
+    },
+    {
+      industry: "LEAD GENERATION",
+      country: "SOUTH AFRICA",
+      headline: "Lead Campaign: 2,627 Website Leads Across 4.76M Impressions",
+      challenge: "The campaign needed high-volume lead generation while keeping acquisition costs measurable across multiple campaign segments.",
+      proofImage: proofLeadVolumePath,
+      proofAlt: "Meta Ads campaign table showing 2,627 website leads, R130,279.22 total spent, R27.35 CPM, and 4,763,958 impressions.",
+      proofCaption: "Meta Ads campaign report. Visible proof: 2,627 website leads, R130,279.22 total spend, R27.35 CPM, and 4,763,958 impressions.",
+      proofExplanation: "The report total row shows lead volume, total spend, CPM, and impressions. This supports a scale-focused lead-generation case where the output was measured by website leads rather than engagement.",
+      metrics: [
+        { label: "Website Leads", value: "2,627" },
+        { label: "Impressions", value: "4.76M" },
+        { label: "Total Spend", value: "R130,279" },
+        { label: "CPM", value: "R27.35" },
+      ],
+      quote: "The campaign was built for volume, but the reporting still made the cost and output visible enough to manage.",
+      tags: ["Website Leads", "Meta Ads", "Scale Campaign"],
+    },
+    {
+      industry: "GOOGLE ADS",
+      country: "EU MARKET",
+      headline: "Search Campaign: 135 Conversions at €0.13 Average CPC",
+      challenge: "The account needed search-intent traffic that could produce conversions without driving up click costs.",
+      proofImage: proofGoogleAdsPath,
+      proofAlt: "Google Ads overview showing 135 conversions, 126K impressions, €0.13 average CPC, and €231 cost.",
+      proofCaption: "Google Ads overview. Visible proof: 135 conversions, 126K impressions, €0.13 average CPC, and €231 cost. Account identifiers are redacted.",
+      proofExplanation: "The overview panel shows conversion count, impression volume, average CPC, and total cost for the selected date range. The account details are covered so the proof is usable without exposing private identifiers.",
+      metrics: [
+        { label: "Conversions", value: "135" },
+        { label: "Impressions", value: "126K" },
+        { label: "Avg CPC", value: "€0.13" },
+        { label: "Cost", value: "€231" },
+      ],
+      quote: "Search worked because the clicks were cheap, the intent was direct, and the campaign was measured by conversions.",
+      tags: ["Google Ads", "Search Intent", "Conversion Tracking"],
+      redactions: [
+        { top: "0%", right: "0%", width: "28%", height: "14%" },
+      ],
+    },
+  ];
+
   return (
     <div className="pt-24">
       {/* Header */}
@@ -453,49 +596,10 @@ function ResultsTab() {
       {/* Case Studies */}
       <section className="py-16 reveal" style={{ background: "#111122" }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <CaseStudyCard
-              industry="AUTOMOTIVE"
-              country="WEST AFRICA"
-              headline="Car Dealer: 2 Leads/Week to 23 Qualified Buyers in 10 Days"
-              challenge="Sole reliance on marketplace listings. Zero digital presence. Cars sitting unsold for 3+ weeks."
-              metrics={[
-                { label: "Ad Spend", value: "$16 USD" },
-                { label: "Leads", value: "23 Qualified" },
-                { label: "CPL", value: "$0.70/lead" },
-                { label: "Outcome", value: "2 Cars Sold" },
-              ]}
-              quote="Buyers were asking to come for inspection. Not just asking how much. Real buyers."
-              tags={["Meta Messages Campaign", "WhatsApp Funnel"]}
-            />
-            <CaseStudyCard
-              industry="HOME SERVICES"
-              country="WEST AFRICA"
-              headline="Solar Company: 48 Installation Enquiries in 21 Days"
-              challenge="Zero digital marketing. 100% referral-dependent. Inconsistent revenue."
-              metrics={[
-                { label: "CPL Before", value: "No system" },
-                { label: "CPL After", value: "$0.22/lead" },
-                { label: "Leads (21d)", value: "48 Enquiries" },
-                { label: "ROAS", value: "6.2x" },
-              ]}
-              quote="We had never run ads. Now our calendar is booked 3 weeks ahead."
-              tags={["Meta Leads", "Google Search", "Landing Page"]}
-            />
-            <CaseStudyCard
-              industry="E-COMMERCE"
-              country="WEST AFRICA"
-              headline="Fashion Brand: CPL Reduced 88% in 30 Days"
-              challenge="High ad spend, poor targeting, weak creative. Low ROAS."
-              metrics={[
-                { label: "CPL Before", value: "₦850/lead" },
-                { label: "CPL After", value: "Under ₦100" },
-                { label: "Leads (30d)", value: "312 Leads" },
-                { label: "ROAS", value: "4.9x" },
-              ]}
-              quote="Same budget. Nearly 9x more leads. The targeting was the game changer."
-              tags={["Meta Leads Rebuild", "Lookalike Audiences", "Creative Brief"]}
-            />
+          <div className="grid grid-cols-1 gap-8">
+            {caseStudies.map((caseStudy) => (
+              <CaseStudyCard key={`${caseStudy.industry}-${caseStudy.headline}`} {...caseStudy} />
+            ))}
           </div>
         </div>
       </section>
